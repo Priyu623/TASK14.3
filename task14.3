@@ -1,0 +1,20 @@
+- name: "TO RUN PLAYBOOK FOR TASK 14.3"
+  hosts: all
+  vars_files:
+          - "{{ ansible_facts['distribution'] }}-{{ ansible_facts['distribution_major_version'] }}.yml"
+
+  tasks:
+     - name: "INSTALL THE WEB SERVER"
+       package:
+              name: "{{ package_name }}"
+              state: present
+
+     - name: "TO CREATE INDEX.HTML PAGE IN THE DOCUMENT ROOT"
+       copy:
+              content: "<h1> WELCOME TO {{ ansible_distribution }} OS SERVER !! </h1>"
+              dest: "{{ document_root }}/index.html"
+
+     - name: "TO START THE SERVICES"
+       service:
+              name: "{{ service_name }}"
+              state: started
